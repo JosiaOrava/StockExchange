@@ -3,10 +3,8 @@ import time
 import psutil
 import subprocess
 
-# Path to your executable file
-exe_path = "X:\\Dev\\Trading\\stock.exe"
 
-# Name of the Binance process (replace with the actual process name if different)
+exe_path = "X:\\Dev\\Trading\\stock.exe"
 binance_process_name = "Binance.exe"
 
 # Helper function to check if Binance is running
@@ -23,17 +21,15 @@ def monitor_binance():
     while True:
         if is_binance_running():
             if exe_process is None:
-                # Launch the executable if Binance starts
-               
+                # Launch the executable if Binance starts               
                 exe_process = subprocess.Popen([exe_path])
         else:
             if exe_process is not None:
-                # Terminate the executable if Binance closes
-           
+                # Terminate the executable if Binance closes        
                 exe_process.terminate()
                 exe_process = None
 
-        time.sleep(2)  # Check every 2 seconds
+        time.sleep(2) 
 
 if __name__ == "__main__":
     monitor_binance()

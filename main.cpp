@@ -14,7 +14,7 @@ using namespace std;
 void setConsolePosition(int x, int y) {
     HWND consoleWindow = GetConsoleWindow(); // Get the handle to the console window
     if (consoleWindow != nullptr) {
-        MoveWindow(consoleWindow, x, y, 80, 10, TRUE); // Set position (x, y) and size (width: 800, height: 600)
+        MoveWindow(consoleWindow, x, y, 80, 10, TRUE); // Set position (x, y)
     } else {
         std::cerr << "Failed to get console window handle!" << std::endl;
     }
@@ -30,7 +30,7 @@ void enableAnsiEscapeCodes() {
 }
 
 
-// Function to get the current time in Finnish time (EET/EEST)
+// Function to get the current time in Finnish time (UTC+2)
 tm getCurrentFinnishTime() {
     time_t now = time(nullptr);
     tm localTime = *localtime(&now);
@@ -70,7 +70,7 @@ int main() {
     };
 
     while (true) {
-        // Clear the console
+        
         cout << "\033[H";
 
         // Get the current Finnish time
@@ -100,7 +100,7 @@ int main() {
 
        
 
-            // Set a fixed width for the name (e.g., 40 characters) without affecting time formatting
+            // Set a fixed width for the name (e.g., 33 characters) without affecting time formatting
             cout << left << setw(33) << setfill(' ') << name << "Opening Hours: "
                 << right << setw(2) << setfill('0')  << openHour  << ":" << setw(2) << openMinute
                 << " - "
@@ -116,7 +116,6 @@ int main() {
             cout << endl;
         }
         cout << "\r";
-        // Wait for 100ms before updating
         this_thread::sleep_for(chrono::milliseconds(100));
     }
 
